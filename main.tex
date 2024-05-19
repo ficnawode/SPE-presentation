@@ -54,6 +54,7 @@
             \begin{figure}
                 \centering
                 \includegraphics[width=\textwidth]{images/gsi_green_cube.jpg}
+                \imagesource{https://ttsp-hwp.de/en/project/gsi/}
             \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -61,6 +62,24 @@
                 \item The Green Cube was built in 2015 as a solution to the growing computational needs of GSI (and in the future, FAIR).
                 \item The investment totaled \num{12} million euros in construction costs and \num{21} million euros overall.
             \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Green Cube: Inside}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Inside the temperature is kept at around 15 degrees, even in the summer
+                \item During the winter the heat recuperated from the working nodes is used to heat up the canteen nextdoor
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/gsi_green_cube_inside.jpg}
+                \imagesource{https://ttsp-hwp.de/en/project/gsi/}
+            \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
@@ -86,17 +105,26 @@
 \end{frame}
 
 
-% storage capabilities
-
-% lustre
-\begin{frame}{Software: \textit{Lustre} File System}
+\begin{frame}{Software: \textit{Singularity} containers}
     \begin{columns}
         \begin{column}{0.4\textwidth}
             \begin{figure}
                 \centering
-                \includegraphics[width=\textwidth]{images/lustre_logo.png}
+                \includegraphics[width=\textwidth]{images/singularity_logo.png}
             \end{figure}
         \end{column}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item Singularity containers are used to encapsulate software environments. (like docker)
+                \item Each time a job is launched, or a user signs in, a new container is created.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% lustre
+\begin{frame}{Software: \textit{Lustre} File System}
+    \begin{columns}
         \begin{column}{0.6\textwidth}
             \begin{itemize}
                 \item High-performance distributed file system.
@@ -104,6 +132,12 @@
                 \item Used in many supercomputers and data centers.
                 \item Scalable to thousands of devices.
             \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/lustre_logo.png}
+            \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
@@ -140,12 +174,6 @@ fusermount -u $mnt
 % slurm workload manager
 \begin{frame}{Software: \textit{SLURM} Workload Manager}
     \begin{columns}
-        \begin{column}{0.4\textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[width=0.5\textwidth]{images/slurm_logo.png}
-            \end{figure}
-        \end{column}
         \begin{column}{0.6\textwidth}
             \begin{itemize}
                 \item Workload manager for Linux clusters.
@@ -155,6 +183,12 @@ fusermount -u $mnt
                 \item Easy to use: \texttt{sbatch}, \texttt{srun}, \texttt{squeue}, \texttt{sinfo}.
                       Work gets delegated to nodes automatically through bash scripts or commands.
             \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/slurm_logo.png}
+            \end{figure}
         \end{column}
     \end{columns}
 \end{frame}
@@ -190,9 +224,73 @@ scancel <job_id>
     \end{columns}
 \end{frame}
 
+\begin{frame}{Software: CVMFS Software distribution}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item CernVM File System.
+                \item Some of the programs used for simulation and analysis take very long to compile,
+                      so they are cached and distributed through CVMFS which is interfaced as a directory of compiled
+                      versions of the programs on Lustre.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/cvmfs_list.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{Green Cube at work: CBMRoot (on top of ROOT/GEANT4)}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/sts_reco.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{itemize}
+                \item The CBMRoot framework is built on top of GEANT4. It is used to simulate the passage of particles
+                      through the CBM experiment's future detectors.
+                \item The volume of data generated by these simulations is in the terabytes
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Green Cube at work: HadesSoft (on top of ROOT)}
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/HADES_detectors.png}
+                \imagesource{https://www.researchgate.net/publication/358337013/}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \begin{itemize}
+                \item The HADES (High Acceptance DiElectron Spectrometer) experiment uses the HadesSoft framework to analyze
+                      collision data.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{}
+    \centering
+    \Large{Questions?}
+\end{frame}
+
+
 \begin{frame}{}
     \centering
     \Large{Thank you for your attention}
 \end{frame}
+
+
 
 \end{document}
