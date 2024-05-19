@@ -66,15 +66,129 @@
 \end{frame}
 
 % overall specs
+\begin{frame}{Green Cube: Overall Specs}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item size: 27 \si{\meter} x 30 \si{\meter} x height 22 \si{\meter} (6 levels)
+                \item 12 \si{\mega\watt} cooling capability
+                \item 600 nodes, on average 90 cores per node
+                \item 400 GPUs
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Maximum number of racks: 768 2.2 \si{\meter} racks
+                \item 60 petabytes of storage, will be expanded to 250 petabytes for FAIR
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
 
 % storage capabilities
 
 % lustre
+\begin{frame}{Software: \textit{Lustre} File System}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/lustre_logo.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item High-performance distributed file system.
+                \item Open-source, POSIX-compliant.
+                \item Used in many supercomputers and data centers.
+                \item Scalable to thousands of devices.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Lustre: Mounting the File System Remotely}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/lustre_petabytes.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            In a file, such as \texttt{mount.sh}:
+            \begin{lstlisting}[language=bash]
+mnt='/tmp/lustre/'
+mkdir -p $mnt
+sshfs -o ProxyJump=lxpool.gsi.de tfic@lustre.hpc.gsi.de:/lustre $mnt
+            \end{lstlisting}
+            then, to mount the file system:
+            \begin{lstlisting}[language=bash]
+bash mount.sh
+            \end{lstlisting}
+            to unmount:
+            \begin{lstlisting}[language=bash]
+fusermount -u $mnt
+            \end{lstlisting}
+        \end{column}
+    \end{columns}
+\end{frame}
 
 % working nodes
 
 % slurm workload manager
+\begin{frame}{Software: \textit{SLURM} Workload Manager}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/slurm_logo.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \begin{itemize}
+                \item Workload manager for Linux clusters.
+                \item Open-source.
+                \item Used in many supercomputers and data centers.
+                \item Scalable to thousands of devices.
+                \item Easy to use: \texttt{sbatch}, \texttt{srun}, \texttt{squeue}, \texttt{sinfo}.
+                      Work gets delegated to nodes automatically through bash scripts or commands.
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
 
+\begin{frame}[fragile]{SLURM: Example Job Script}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/slurm_logo.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            In a file, such as \texttt{job.sh}:
+            \begin{lstlisting}[language=bash]
+#!/bin/bash
+#SBATCH --output %j_%N.out
+hostname ; sleep ${1:-30}
+            \end{lstlisting}
+            then, to launch the script as a job:
+            \begin{lstlisting}[language=bash]
+sbatch job.sh
+            \end{lstlisting}
+            to check job status:
+            \begin{lstlisting}[language=bash]
+squeue -u $USER 
+            \end{lstlisting}
+            to cancel a job:
+            \begin{lstlisting}[language=bash]
+scancel <job_id>
+            \end{lstlisting}
+        \end{column}
+    \end{columns}
+\end{frame}
 
 \begin{frame}{}
     \centering
